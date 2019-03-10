@@ -22,7 +22,7 @@ class ContentList extends Component {
       //결국 jsx가 읽혀질때는 xml형태의 js로 변환되기 때문이다.
   		component.push(
         // row는 부트스트랩에서 한줄을 의미 하는 class이다.
-  			<div className="row">
+  			<div className="row" key={i}>
   				{
             //위에서 4개의 데이터를 뽑아서 저장해 가지고 있던 배열을 map을 이용해서 4개의 콘텐츠를 그려준다.
   					dataPerRow.map((item,index) => {
