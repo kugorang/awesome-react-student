@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./note.css";
-// import PropTypes from "prop-types"
 
 export default class Note extends Component {
   static propTypes = {
@@ -28,7 +27,6 @@ export default class Note extends Component {
     }
 
     this.props.edit(this.props.index, title, content);
-
     this.handleBlur();
   }
 
@@ -53,9 +51,36 @@ export default class Note extends Component {
   }
 
   handleBlur = () => {
+    const {content} = this.state;
+
+    if (content) {
+      return;
+    }
+
     this.setState({
       isWritingFocused: false
     });
+  }
+  
+  setBoundary = (dom) => {
+    // console.log("setBoundary");
+    this.noteBoundary = dom
+  }
+
+  handleClickOutside = (e) => {
+    if (this.noteBoundary && !this.noteBoundary.contains(e.target)) {
+      this.setState({
+        isWritingFocused: false
+      });
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   render() {
@@ -88,7 +113,7 @@ export default class Note extends Component {
             </i>
           </div>
         </div>
-        <div className='card yellow lighten-4' onClick={handleClick}>
+        <div className='card yellow lighten-4' ref={this.setBoundary} onClick={handleClick}>
           <div className='card-content black-text'>
             { isWritingFocused ? (<EditNote {...editNoteProps} />) : (<ViewNote {...viewNoteProps} />) }
           </div>

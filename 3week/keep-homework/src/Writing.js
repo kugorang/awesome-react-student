@@ -48,6 +48,12 @@ export default class Writing extends Component {
   }
 
   handleBlur = () => {
+    const {content} = this.state;
+
+    if (content) {
+      return;
+    }
+
     this.setState({
       isWritingTitleFocused: false
     })
