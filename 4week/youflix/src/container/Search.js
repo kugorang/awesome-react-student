@@ -1,77 +1,71 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import ContentList from "../component/contentList/ContentList.js";
-
-// const Text = (props) => {
-//     return (
-//         <div>
-//             {props.children}
-//         </div>
-//     )
-// }
+import axios from "axios";
 
 export default class Search extends Component {
-    state = {
-        contents: [],
-        keyword: ""
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contents: [],
+      keyword: ""
     };
+  }
 
-    handleInputChange = (e) => {
-        this.setState({keyword: e.target.value});
-    };
+  handleInputChange = (e) => {
+    this.setState({keyword: e.target.value});
+  };
 
-    setContents = (data) => {
-        let list = [];
+  handleSubmit = (e) => {
+    this.fetchSearch(this.state.keyword);
 
-        data.items.forEach((item) => {
-            if (item.id.videoId) {
-                list.push({ id: item.id.videoId, name: item.snippet.title });
-            }
+    // 이벤트 버블링
+    e.preventDefault();
+  }
+
+  fetchSearch = (keyword) => {
+    let maxResults = 30;
+    let token = 'AIzaSyC-v1sIG2Wn3YnoD_7_bBS4zPDceDLKmLY';
+
+    axios.get('https://www.googleapis.com/youtube/v3/search?q='+keyword+'&part=snippet&key='+token+'&maxResults='+maxResults)
+      .then(({ data }) => {
+        // console.log(data);
+
+        const list = this.setContents(data);
+
+        this.setState({ 
+          contents: list 
         });
 
-        return list;
-    }
+        //console.log(list);
+    });
+  }
 
-    handleSubmit = (e) => {
-        this.fetchSearch(this.state.keyword);
+  setContents = (data) => {
+    let list = [];
 
-        // 이벤트 버블링
-        e.preventDefault();
-    }
+    data.items.forEach ((item) => {
+      if (item.id.videoId) {
+        list.push({ id: item.id.videoId, name: item.snippet.title });
+      }
+    });
 
-    fetchSearch = (keyword) => {
-        let maxResults = 30;
-        let token = 'AIzaSyC-v1sIG2Wn3YnoD_7_bBS4zPDceDLKmLY';
+    return list;
+  }
 
-        axios.get (
-            'https://www.googleapis.com/youtube/v3/search?q=' + 
-            keyword + '&part=snippet&key=' + 
-            token + '&maxResults=' + 
-            maxResults
-        )
-        .then(({ data }) => {
-            // console.log(data);
-            const list = this.setContents(data);
-            this.setState({ contents: list});
-            console.log(list);
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <form onSubmit = {this.handleSubmit}>
-                    <div>
-                        <label>검색</label>
-                        <input 
-                            value={this.state.keyword} 
-                            onChange={this.handleInputChange}
-                        />
-                    </div>
-                </form>
-
-                <ContentList contents={this.state.contents} />
+  render() {
+    return (
+      <div className="Search">
+        <form onSubmit = {this.handleSubmit}>
+          <div className="form-group row align-items-center justify-content-center">
+            <div className="col-md-3">
+              <label>검색</label>
+              <input type="text" className="form-control keyword" value={this.state.keyword} onChange={this.handleInputChange} placeholder="Search..." />
             </div>
-        );
-    }
+          </div>
+        </form>
+        <ContentList contents={this.state.contents} />
+      </div>
+    );
+  }
 }
