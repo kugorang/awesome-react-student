@@ -32,7 +32,7 @@ export const changeKeyword= (keyword) => ({
   keyword
 })
 
-const token = 'AIzaSyBhSQTUN22ZmUdQLYWc0cyKERvqzVCZqkI'
+const token = 'mytoken'
 const maxResults = 30
 
 export const fetchContents = () => {

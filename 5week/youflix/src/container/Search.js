@@ -44,7 +44,7 @@ class Search extends Component {
 
   // fetchSearch = (keyword) => {
   //   let maxResults = 30
-  //   let token = 'AIzaSyBhSQTUN22ZmUdQLYWc0cyKERvqzVCZqkI'//본인의 토큰을 발급 받아서 입력
+  //   let token = 'mytoken'//본인의 토큰을 발급 받아서 입력
   //   axios.get('https://www.googleapis.com/youtube/v3/search?q='+keyword+'&part=snippet&key='+token+'&maxResults='+maxResults)
   //   .then(({data}) => {
   //     const list = this.setContents(data)
