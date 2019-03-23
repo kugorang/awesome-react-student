@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';//bootstrap css를 사용하기 위해서 불러옵니다.
 import Navbar from './component/navbar/Navbar.js';

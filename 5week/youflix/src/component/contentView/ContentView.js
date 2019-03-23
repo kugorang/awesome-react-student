@@ -12,6 +12,7 @@ class ContentView extends Component {
           iframe으로 실행 시킨다.
         */}
        	<iframe
+          title="content-view-iframe"
        		className="content-view-iframe"
       		frameBorder="0"
       		width="100%" height="100vw"

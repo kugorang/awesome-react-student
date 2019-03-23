@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';//화면 이동을 위해 Link를 react-router-dom에서 불러옴
+import { Link } from 'react-router-dom'; // 화면 이동을 위해 Link를 react-router-dom에서 불러옴
 import './Navbar.css';
 
 //상단 메뉴를 가지고 있는 컴포넌트
@@ -8,7 +8,7 @@ class Navbar extends Component {
     return (
       <div className="App">
        <nav className="navbar navbar-expand-lg navbar-dark bg-dark-trans ">
-		  <a className="navbar-brand logo" href="#">YOUFLIX</a>
+		  <a className="navbar-brand logo" href="/">YOUFLIX</a>
 		  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span className="navbar-toggler-icon"></span>
 		  </button>

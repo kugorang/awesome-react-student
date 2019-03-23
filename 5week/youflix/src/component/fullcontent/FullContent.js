@@ -12,6 +12,7 @@ class FullContent extends Component {
           iframe으로 실행 시킨다.
         */}
         <iframe
+          title="my-iframe"
       		className="my-iframe"
       		frameBorder="0"
       		src={"https://www.youtube.com/embed/"+this.props.content.id+"?autoplay=1&rel=0"}

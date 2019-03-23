@@ -11,7 +11,7 @@ const ContentView = (props) => {
     }
 
 const FullContentLink = (props) => {
-    return (<a onClick={props.onChangeFullContent}>
+    return (<a href={props.onChangeFullContent} onClick={props.onChangeFullContent}>
               {props.children}
             </a>)
     }
@@ -39,7 +39,7 @@ class Content extends Component {
 
   displayImg = () => {
     let imgSrc = "https://img.youtube.com/vi/"+this.props.content.id+"/0.jpg"
-    let imgComponent = (<div><img className="thumbnail" src={imgSrc} />{this.state.isShow?(<div className="middle"><div className="text"> {this.props.content.name} </div></div>):""}</div>);
+    let imgComponent = (<div><img className="thumbnail" src={imgSrc}  alt="youtube thumnail" />{this.state.isShow?(<div className="middle"><div className="text"> {this.props.content.name} </div></div>):""}</div>);
  
     return imgComponent
   }
